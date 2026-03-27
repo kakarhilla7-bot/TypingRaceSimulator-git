@@ -18,10 +18,10 @@ public class Typist{
 	double typistAccuracy;
 	
 	public Typist(char typistSymbol, String typistName, double typistAccuracy){
-		this.typistSymbol = typostSymbol;
+		this.typistSymbol = typistSymbol;
 		this.typistName = typistName;
 		if (typistAccuracy>=0.0 && typistAccuracy <= 1.0){
-			this.typistAccuracy = typistAcccuracy;
+			this.typistAccuracy = typistAccuracy;
 		}
 	}
 
