@@ -59,7 +59,7 @@ public class Typist{
 		if (burnOutFlag = true){
 			return burnOutTurns;
 		}
-		returns 0;
+		return 0;
 	}
 
 	public void resetToStart(){
