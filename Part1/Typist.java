@@ -1,4 +1,15 @@
-class Typist{
+/**
+ * This class is the blueprint for a typist that will take part in the typing race
+ *
+ * Starter code generously abandoned by Ty Posaurus, your predecessor,
+ * who typed with two fingers and considered that "good enough".
+ * He left a sticky note: "the slide-back thing is optional probably".
+ * It is not optional. Good luck.
+ *
+ * @author Hilla Kakar
+ * @version 1
+ */
+public class Typist{
 	String typistName;
 	char typistSymbol;
 	int progress;
@@ -14,65 +25,69 @@ class Typist{
 		}
 	}
 
-	public static burnOut(int turns){
+	public void burnOut(int turns){
 		burnOutFlag = true;
 		burnOutTurns = turns;
+		return;
 	}
 
-	public static recoverFromBurnout(){
+	public void recoverFromBurnout(){
 		burnOutTurns = burnOutTurns -1;
 		if (burnOutTurns==0){
 			burnOutFlag = false;
 		}
+		return;
 	}
 
-	public getAccuracy(){
+	public double getAccuracy(){
 		return this.typistAccuracy;
 	}
 
-	public static int getProgress(){
+	public int getProgress(){
 		return progress;
 	}
 
-	public getName(){
+	public String getName(){
 		return this.typistName;
 	}
 
-	public getSymbol(){
+	public char getSymbol(){
 		return this.typistSymbol;
 	}
 
-	public static int getBurnoutTurnsRemaining(){
+	public int getBurnoutTurnsRemaining(){
 		if (burnOutFlag = true){
 			return burnOutTurns;
 		}
 		returns 0;
 	}
 
-	public static resetToStart(){
+	public void resetToStart(){
 		progress = 0;
 		burnOutTurns = 0;
 		burnOutFlag = false;
+		return;
 	}
 
-	public static boolean isBurntout(){
+	public boolean isBurntout(){
 		if (burnOutFlag = true){
 			return true;
 		}
 		return false;
 	}
 
-	public static typeCharacter(){
+	public void typeCharacter(){
 		progress++;
+		return;
 	}
 
-	public static slideBack(int amount){
+	public void slideBack(int amount){
 		if (progress-amount!=0){
 			progress = progress - amount;
 		}
 	}
 
-	public setAccuracy(double newAccuracy){
+	public void setAccuracy(double newAccuracy){
 		if (newAccuracy<=0.0){
 			newAccuracy = 0.0;
 		}
@@ -80,10 +95,11 @@ class Typist{
 			newAccuracy = 1.0;
 		}
 		this.typistAccuracy = newAccuracy;
+		return;
 		
 	}
 
-	public setSymbol(char newSymbol){
+	public void setSymbol(char newSymbol){
 		this.typistSymbol = newSymbol;
 	}
 }
