@@ -3,11 +3,17 @@ class TestTypist {
 
         Typist t = new Typist('A', "Test", 0.8);
 
-        t.typeCharacter(); // progress = 1
-        t.typeCharacter(); // progress = 2
+        t.burnOut(2);
 
-        t.slideBack(7); // should go back to 0 (not negative)
+        System.out.println("Burnouts remaining: " + t.getBurnoutTurnsRemaining());
+        System.out.println("Is burnt out: " + t.isBurntout());
 
-        System.out.println("Progress: " + t.getProgress());
+        t.recoverFromBurnout();
+        System.out.println("Burnouts remaining: " + t.getBurnoutTurnsRemaining());
+        System.out.println("Is burnt out: " + t.isBurntout());
+
+        t.recoverFromBurnout();
+        System.out.println("Burnouts remaining: " + t.getBurnoutTurnsRemaining());
+        System.out.println("Is burnt out: " + t.isBurntout());
     }
 }

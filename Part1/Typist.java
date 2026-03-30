@@ -23,6 +23,9 @@ public class Typist{
 		if (typistAccuracy>=0.0 && typistAccuracy <= 1.0){
 			this.typistAccuracy = typistAccuracy;
 		}
+		this.progress = 0;
+		this.burnOutFlag = false;
+		this.burnOutTurns = 0;
 	}
 
 	public void burnOut(int turns){
@@ -32,11 +35,12 @@ public class Typist{
 	}
 
 	public void recoverFromBurnout(){
-		burnOutTurns = burnOutTurns -1;
-		if (burnOutTurns==0){
-			burnOutFlag = false;
-		}
-		return;
+    		if (burnOutTurns > 0){
+        		burnOutTurns--;
+    		}
+    		if (burnOutTurns == 0){
+        		burnOutFlag = false;
+    		}
 	}
 
 	public double getAccuracy(){
@@ -56,10 +60,7 @@ public class Typist{
 	}
 
 	public int getBurnoutTurnsRemaining(){
-		if (burnOutFlag = true){
-			return burnOutTurns;
-		}
-		return 0;
+		retun burnOutTurns;
 	}
 
 	public void resetToStart(){
@@ -69,8 +70,8 @@ public class Typist{
 		return;
 	}
 
-	public boolean isBurntout(){
-		if (burnOutFlag = true){
+	public boolean isBurntOut(){
+		if (burnOutFlag == true){
 			return true;
 		}
 		return false;
@@ -85,7 +86,9 @@ public class Typist{
 		if (progress-amount>0){
 			progress = progress - amount;
 		}
-		progress = 0;
+		else{
+			progress = 0;
+		}
 	}
 
 	public void setAccuracy(double newAccuracy){
