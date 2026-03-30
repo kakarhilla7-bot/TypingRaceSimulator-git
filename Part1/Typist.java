@@ -82,9 +82,10 @@ public class Typist{
 	}
 
 	public void slideBack(int amount){
-		if (progress-amount!=0){
+		if (progress-amount>0){
 			progress = progress - amount;
 		}
+		System.out.println("Progress cannot be less than 0");
 	}
 
 	public void setAccuracy(double newAccuracy){
@@ -102,4 +103,5 @@ public class Typist{
 	public void setSymbol(char newSymbol){
 		this.typistSymbol = newSymbol;
 	}
+	
 }
