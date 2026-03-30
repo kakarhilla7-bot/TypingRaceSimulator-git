@@ -85,7 +85,7 @@ public class Typist{
 		if (progress-amount>0){
 			progress = progress - amount;
 		}
-		System.out.println("Progress cannot be less than 0");
+		progress = 0;
 	}
 
 	public void setAccuracy(double newAccuracy){
