@@ -60,7 +60,7 @@ public class Typist{
 	}
 
 	public int getBurnoutTurnsRemaining(){
-		retun burnOutTurns;
+		return burnOutTurns;
 	}
 
 	public void resetToStart(){
