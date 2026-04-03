@@ -116,7 +116,7 @@ public class TypingRace
             highestAccuracy = seat3Typist.getAccuracy();
             winner = seat3Typist;
         }
-        System.out.println("And the winner is. . ."+ winner + "!");
+        System.out.println("And the winner is. . ."+ winner.getName() + "!");
         System.out.println("Final accuracy: " + highestAccuracy);
     }
 
