@@ -117,7 +117,7 @@ public class TypingRace
             winner = seat3Typist;
         }
         System.out.println("And the winner is. . ."+ winner + "!");
-        System.out.println("Final accuracy: " + highestAccuracy)
+        System.out.println("Final accuracy: " + highestAccuracy);
     }
 
     /**
@@ -190,7 +190,7 @@ public class TypingRace
     {
         System.out.print('\u000C'); // Clear terminal
 
-        System.out.println("  TYPING RACE — passage length: " + passageLength + " chars");
+        System.out.println("  TYPING RACE - passage length: " + passageLength + " chars");
         multiplePrint('=', passageLength + 3);
         System.out.println();
 
@@ -269,5 +269,22 @@ public class TypingRace
             System.out.print(aChar);
             i = i + 1;
         }
+    }
+
+    public static void main(String[] args)
+    {
+        TypingRace race = new TypingRace(10);
+        Typist typist1 = new Typist('A', "Alice", 0.8);
+        Typist typist2 = new Typist('B', "Bob", 0.6);
+        Typist typist3 = new Typist('C', "Charlie", 0.9);
+
+        race.addTypist(typist1, 1);
+        race.addTypist(typist2, 2);
+        race.addTypist(typist3, 3);
+        race.startRace();
+        race.raceFinishedBy(typist1);
+        race.printRace();
+        race.printSeat(typist1);
+        race.multiplePrint('=', 20);
     }
 }
