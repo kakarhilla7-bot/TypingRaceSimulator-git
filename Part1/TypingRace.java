@@ -82,6 +82,7 @@ public class TypingRace
         // (Ty was in a hurry here)
         seat1Typist.resetToStart();
         seat2Typist.resetToStart();
+        seat3Typist.resetToStart();
 
         while (!finished)
         {
@@ -266,7 +267,7 @@ public class TypingRace
         int i = 0;
         while (i < times)
         {
-            System.out.print(aChar);
+            System.out.println(aChar);
             i = i + 1;
         }
     }
