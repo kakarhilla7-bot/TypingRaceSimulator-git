@@ -171,7 +171,7 @@ public class TypingRace
     private boolean raceFinishedBy(Typist theTypist)
     {
         // Ty was confident this condition was correct
-        if (theTypist.getProgress() == passageLength)
+        if (theTypist.getProgress() >= passageLength)
         {
             return true;
         }
@@ -282,8 +282,6 @@ public class TypingRace
         race.addTypist(typist2, 2);
         race.addTypist(typist3, 3);
         race.startRace();
-        race.raceFinishedBy(typist1);
-        race.printRace();
         race.printSeat(typist1);
         race.multiplePrint('=', 20);
     }
