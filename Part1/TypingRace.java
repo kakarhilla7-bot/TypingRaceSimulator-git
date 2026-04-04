@@ -107,18 +107,18 @@ public class TypingRace
         }
 
         // TODO (Task 2a): Print the winner's name here
-        double highestAccuracy = seat1Typist.getAccuracy();
+        double highestProgress = seat1Typist.getProgress();
         Typist winner = seat1Typist;
-        if (seat2Typist.getAccuracy()>highestAccuracy){
-            highestAccuracy = seat2Typist.getAccuracy();
+        if (seat2Typist.getProgress()>highestProgress){
+            highestProgress = seat2Typist.getProgress();
             winner = seat2Typist;
         }
-        else if(seat3Typist.getAccuracy()>highestAccuracy){
-            highestAccuracy = seat3Typist.getAccuracy();
+        else if(seat3Typist.getProgress()>highestProgress){
+            highestProgress = seat3Typist.getProgress();
             winner = seat3Typist;
         }
         System.out.println("And the winner is. . ."+ winner.getName() + "!");
-        System.out.println("Final accuracy: " + highestAccuracy);
+        System.out.println("Final accuracy: " + winner.getAccuracy());
     }
 
     /**
@@ -267,7 +267,7 @@ public class TypingRace
         int i = 0;
         while (i < times)
         {
-            System.out.println(aChar);
+            System.out.print(aChar);
             i = i + 1;
         }
     }
