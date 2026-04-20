@@ -78,14 +78,14 @@ public class TypingRaceGUI {
             boolean isAutocorrect = autocorrect.isSelected();
             boolean isCaffeineMode = caffeineMode.isSelected();
             boolean isNightShift = nightShift.isSelected();
-            startRace(frame, passage);
+            startRace(frame, passage, seats);
         
         });
         frame.pack();
         frame.setVisible(true);
     }
 
-    public static void startRace(JFrame frame, String passage) {
+    public static void startRace(JFrame frame, String passage, int seats) {
         frame.getContentPane().removeAll();
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -93,53 +93,44 @@ public class TypingRaceGUI {
         JLabel passageLabel = new JLabel("<html>" + passage + "</html>");
         panel.add(passageLabel);
 
-        Typist t1 = new Typist('1', "P1", 0.8);
-        Typist t2 = new Typist('2', "P2", 0.7);
-        JLabel t1Label = new JLabel("P1: ");
-        JLabel t2Label = new JLabel("P2: ");
-     
-        int[] progress1 = {0};
-        int[] progress2 = {0};
-        int totalLength = passage.length();
+        Typist[] typists = new Typist[seats];
+        JLabel[] typistLabels = new JLabel[seats];
+        for (int i=0; i<seats; i++){
+            typists[i] = new Typist((char)('1'+i),"P"+(i+1),0.7+Math.random()*0.2);
+        }
+        for(int i=0; i<seats; i++){
+            typistLabels[i] = new JLabel("P"+(i+1)+": ");
+            panel.add(typistLabels[i]);
+        }
+        Timer timer = new Timer(500, null);
+        timer.addActionListener(e -> {
+            for (int i = 0; i < seats; i++) {
+                typists[i].typeCharacter();
 
-        new javax.swing.Timer(500, e -> {
-            t1.typeCharacter();
-            progress1[0] = t1.getProgress();
-            t2.typeCharacter();
-            progress2[0] = t2.getProgress();
+                int progress = typists[i].getProgress();
 
-            int done1 = progress1[0];
-            int done2 = progress2[0];
+                if (progress > passage.length()) {
+                    progress = passage.length();
+                }
+
+                String typed = passage.substring(0, progress);
+                String remaining = passage.substring(progress);
+
+                typistLabels[i].setText("P" + (i+1) + ": " + typed + "|" + remaining);
 
 
-            if (done1>totalLength){
-                done1 = totalLength;
+                if (progress >= passage.length()) {
+                    timer.stop();
+
+                    JLabel winnerLabel = new JLabel("Winner: P" + (i+1));
+                    panel.add(winnerLabel);
+
+                    frame.revalidate();
+                    return; 
+                }
             }
-            if(done2>totalLength){
-                done2 = totalLength;
-            }
-
-            String bar1 = "";
-            for (int i=0; i<done1; i++){
-                bar1 += "|";
-            }
-            for (int i=done1; i<totalLength; i++){
-                bar1 += "-";
-            }
-
-            String bar2 = "";
-            for (int i=0; i<done2; i++){
-                bar2 += "|";
-            }
-            for (int i=done2; i<totalLength; i++){
-                bar2 += "-";
-            }
-
-            t1Label.setText("P1: " + bar1);
-            t2Label.setText("P2: " + bar2);
-        }).start();
-        panel.add(t1Label);
-        panel.add(t2Label);
+        });
+        timer.start();
         frame.revalidate();
         frame.repaint();
         frame.setVisible(true);
