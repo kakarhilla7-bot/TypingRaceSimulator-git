@@ -78,14 +78,14 @@ public class TypingRaceGUI {
             boolean isAutocorrect = autocorrect.isSelected();
             boolean isCaffeineMode = caffeineMode.isSelected();
             boolean isNightShift = nightShift.isSelected();
-            startRace(frame, passage, seats);
+            startRace(frame, passage, seats, isAutocorrect, isCaffeineMode, isNightShift);
         
         });
         frame.pack();
         frame.setVisible(true);
     }
 
-    public static void startRace(JFrame frame, String passage, int seats) {
+    public static void startRace(JFrame frame, String passage, int seats, boolean isAutocorrect, boolean isCaffeineMode, boolean isNightShift) {
         frame.getContentPane().removeAll();
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -102,10 +102,55 @@ public class TypingRaceGUI {
             typistLabels[i] = new JLabel("P"+(i+1)+": ");
             panel.add(typistLabels[i]);
         }
-        Timer timer = new Timer(500, null);
+        
+        int[] caffeineTurnsRemaining = new int[seats];
+        for (int i=0; i<seats; i++){
+            caffeineTurnsRemaining[i] = isCaffeineMode ? 10 : 0;
+        }
+
+        int[] autocorrectCounter = {0};
+        
+        Timer timer = new Timer(200, null);
         timer.addActionListener(e -> {
-            for (int i = 0; i < seats; i++) {
-                typists[i].typeCharacter();
+            
+            if(isAutocorrect && autocorrectCounter[0] % 4==0){
+                for (int i=0; i<seats; i++){
+                    typists[i].slideBack(1);
+                }
+            }
+            autocorrectCounter[0]++;
+
+            for(int i=0; i<seats; i++){    
+                if (typists[i].isBurntOut()) {
+                typists[i].recoverFromBurnout();
+                int progress = typists[i].getProgress();
+                if (progress > passage.length()) {
+                    progress = passage.length();
+                }
+                String typed = passage.substring(0, progress);
+                String remaining = passage.substring(progress);
+                typistLabels[i].setText("P" + (i+1) + ": " + typed + "|" + remaining + " [BURNT OUT]");
+                continue;
+                }
+
+                if (isCaffeineMode && caffeineTurnsRemaining[i] > 0){
+                    typists[i].typeCharacter();
+                    typists[i].typeCharacter();
+                    caffeineTurnsRemaining[i]--;
+                }
+                else if (isCaffeineMode && caffeineTurnsRemaining[i] == 0){
+                    if (Math.random() <0.3){
+                        typists[i].burnOut(3);
+                    }
+                    typists[i].typeCharacter();
+                }
+                else{
+                    typists[i].typeCharacter();
+                }
+            
+                if (isNightShift){
+                    typists[i].setAccuracy(typists[i].getAccuracy() - 0.05);
+                }
 
                 int progress = typists[i].getProgress();
 
@@ -116,7 +161,7 @@ public class TypingRaceGUI {
                 String typed = passage.substring(0, progress);
                 String remaining = passage.substring(progress);
 
-                typistLabels[i].setText("P" + (i+1) + ": " + typed + "|" + remaining);
+                typistLabels[i].setText("<html>P" + (i+1) + ": <span style='color: green;'>" + typed + "</span>|" + remaining + "</html>");
 
 
                 if (progress >= passage.length()) {
