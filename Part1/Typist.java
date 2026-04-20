@@ -9,6 +9,8 @@
  * @author Hilla Kakar
  * @version 1
  */
+package Part1;
+
 public class Typist{
 	String typistName;
 	char typistSymbol;
