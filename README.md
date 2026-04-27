@@ -30,6 +30,9 @@ java TypingRace
 ```
 
 ## Part 2 — GUI Simulation
+```bash
+cd TypingRaceSimulator
+```
 ## How to compile and run
 ```bash
 javac Part1/*.java Part2/*.java
