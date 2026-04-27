@@ -18,7 +18,8 @@ public class Typist{
 	boolean burnOutFlag;
 	int burnOutTurns;
 	double typistAccuracy;
-	
+
+	//Constructor
 	public Typist(char typistSymbol, String typistName, double typistAccuracy){
 		this.typistSymbol = typistSymbol;
 		this.typistName = typistName;
@@ -29,13 +30,13 @@ public class Typist{
 		this.burnOutFlag = false;
 		this.burnOutTurns = 0;
 	}
-
+	//Sets a player in burnout mode for given number of turns
 	public void burnOut(int turns){
 		burnOutFlag = true;
 		burnOutTurns = turns;
 		return;
 	}
-
+	//Reduces burnout turns
 	public void recoverFromBurnout(){
     		if (burnOutTurns > 0){
         		burnOutTurns--;
@@ -45,26 +46,32 @@ public class Typist{
     		}
 	}
 
+	//Returns accuracy
 	public double getAccuracy(){
 		return this.typistAccuracy;
 	}
 
+	//Returns progress
 	public int getProgress(){
 		return progress;
 	}
 
+	//Returns name
 	public String getName(){
 		return this.typistName;
 	}
 
+	//Returns symbol
 	public char getSymbol(){
 		return this.typistSymbol;
 	}
 
+	//Returns burnout turns left
 	public int getBurnoutTurnsRemaining(){
 		return burnOutTurns;
 	}
 
+	//Sets everything to 0
 	public void resetToStart(){
 		progress = 0;
 		burnOutTurns = 0;
@@ -72,6 +79,7 @@ public class Typist{
 		return;
 	}
 
+	//Checks if player is burnt out
 	public boolean isBurntOut(){
 		if (burnOutFlag == true){
 			return true;
@@ -79,11 +87,13 @@ public class Typist{
 		return false;
 	}
 
+	//Increases progress by 1
 	public void typeCharacter(){
 		progress++;
 		return;
 	}
 
+	//Pushes typist back by given amount
 	public void slideBack(int amount){
 		if (progress-amount>0){
 			progress = progress - amount;
@@ -93,6 +103,7 @@ public class Typist{
 		}
 	}
 
+	//Sets typist accuracy
 	public void setAccuracy(double newAccuracy){
 		if (newAccuracy<=0.0){
 			newAccuracy = 0.0;
@@ -105,6 +116,7 @@ public class Typist{
 		
 	}
 
+	//Sets typist symbol
 	public void setSymbol(char newSymbol){
 		this.typistSymbol = newSymbol;
 	}
